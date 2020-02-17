@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <link type="text/css" rel="stylesheet" href="jeux.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script type="text/javascript" src="jeuxFonctionnel.js"></script>
+
+
+    <title>Document</title>
+</head>
+<body onload="generate_table()">
+    <img class ="animable" id ="myAnimation" src="Images/cristaux.png">
+    <div id="contain">
+        <div class="center-div">
+            <span>
+                <input onclick="generate_table()" type="button" value="New game">
+            </span>
+            <span>
+                <input onclick="test()" type="button" value="High scores">
+            </span>
+        </div>
+        <table>
+            <tbody>
+
+            </tbody>
+        </table>
+    </div>   
+</body>
+</html>

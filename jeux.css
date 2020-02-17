@@ -1,0 +1,28 @@
+body
+{
+  padding: 30px;
+  background-color: #ceb0b0;
+}
+.center-div
+{
+  margin: 0 auto;
+  width: 200px;
+  
+  
+}
+ #contain{
+    border-radius: 3px;
+     margin:50px 200px 0px 200px;   
+ }
+
+.animable {
+  
+  position: relative;
+}
+body {
+  background-image: url('Images/bg.jpg');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+
+}
