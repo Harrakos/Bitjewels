@@ -14,15 +14,17 @@ for(var i=0; i<8; i++)
 
 
 class Joyaux {
-  constructor(image, posx, posy,id) {
+  constructor(image, posx, posy,id, imagePre) {
     this.image = image;
     this.posx = posx;
     this.posy = posy;
     this.id = id;
+    this.imagePre = imagePre;
   }
 }
 
 function test(){
+  descenteBlock()
   document.getElementById("myAnimation").animate([
     {transform: 'translateY(0px)'},
     {transform: "translateY(90px)"}
@@ -161,38 +163,67 @@ function cassageLigne(){
  descenteBlock()
 }
 
-function descenteBlock(){
-  for (let i = 0; i < 7; i++) {
-    for (let j = 0; j < 8; j++) {
-      if(tabjoyaux[i+1][j].image == ""){
-        vide = true
-        a = 0
-        while(vide){
-          if (tabjoyaux[i+1+a][j].image == ""){
-            a++;
-            vide = true;
-          }else{
-            vide = false;
-          }
-        }
-        translation = 90*a 
-        dure = 500
-        move = document.getElementById(i*8+j).animate([
-          {transform: "translateY(0px)"},
-          {transform: "translateY("+translation+"px)"}
-        ],{
-          duration:dure,
-        });
-        move.onfinish = function(){
+class deplacement {
+  constructor(distance, src) {
+    this.distance = distance;
+    this.src = src;
+  }
+}
 
-          document.getElementById(i*8+j+8).src = tabjoyaux[i][j].image;
+tabAnimation = new Array();
+
+function descenteBlock(){
+  encore = true 
+  //while(){
+    encore = false;
+    for (let i = 0; i < 7; i++) {
+      for (let j = 0; j < 8; j++) {
+        if(tabjoyaux[i+1][j].image == ""){
+          if (i != 0)
+            encore = true;
+          vide = true;
+          a = 0
+          while(vide){
+            if([i+1+a] > 7)
+              vide = false;
+            else if (tabjoyaux[i+1+a][j].image == ""){
+              a++;
+              vide = true;
+            }else{
+              vide = false;
+            }
+          }
+          translation = 90*a 
+          dure = 500
+          move = document.getElementById(i*8+j).animate([
+            {transform: "translateY(0px)"},
+            {transform: "translateY("+translation+"px)"}
+            ],{
+            duration:500
+            });
+            tabjoyaux[i][j].imagePre = tabjoyaux[i][j].image; 
+          move.onfinish = function(){
+
+          document.getElementById(i*8+j+8).src = tabjoyaux[i][j].imagePre;
           document.getElementById(i*8+j).src = "";
 
+          if (tabjoyaux[i][j].image == "" && i == 0){
+            nbrRandom = Math.round(Math.random()*7);
+            tabjoyaux[i][j].image = tabImage[nbrRandom];
+            document.getElementById(j).src = tabjoyaux[0][j].image;
+          }
+
+          }
           tabjoyaux[i+1][j].image = tabjoyaux[i][j].image;
           tabjoyaux[i][j].image = "";
         }
+        
       }
     }
-  }
+    if (encore){
+     descenteBlock()
+    }
+  console.log(encore)
+ // }
 }
 
